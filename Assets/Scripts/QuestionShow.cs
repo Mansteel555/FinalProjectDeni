@@ -15,21 +15,30 @@ public class QuestionShow : MonoBehaviour
     public static string newSecound;
     public static string newThird;
     public static string newFourth;
+    public static bool updateQuestion = false;
 
 
-
-    void Start()
-    {
-        screenQuestion.GetComponent<Text>().text = "How many doors does it take to change a bar in the sea?";
-        firstAnswer.GetComponent<Text>().text = "Five Doors";
-        secoundAnswer.GetComponent<Text>().text = "What?";
-        thirdAnswer.GetComponent<Text>().text = "What bar?";
-        fourthAnswer.GetComponent<Text>().text = "This isn't a even a question!";
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
-
+        if (updateQuestion == false) 
+        {
+            updateQuestion = true;
+            StartCoroutine(ForceTextToWork());
+        }
     }
+
+    IEnumerator ForceTextToWork()
+    {
+        yield return new WaitForSeconds(0.10f);
+        screenQuestion.GetComponent<Text>().text = newQuestion;
+        firstAnswer.GetComponent<Text>().text = newFirst;
+        secoundAnswer.GetComponent<Text>().text = newSecound;
+        thirdAnswer.GetComponent<Text>().text = newThird;
+        fourthAnswer.GetComponent<Text>().text = newFourth;
+    }
+
+
 }
